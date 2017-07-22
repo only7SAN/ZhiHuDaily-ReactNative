@@ -6,48 +6,30 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+  AppRegistry
 } from 'react-native';
 
-export default class ZhiHuDaily extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+import { StackNavigator,DrawerNavigator } from 'react-navigation';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+import MainScreen from './MainScreen';
+import DrawerPanel from './DrawerPanel';
+
+const ZhiHuDaily = DrawerNavigator({
+  Home:{ screen : MainScreen },
+  Drawer:{ screen : DrawerPanel },
+},{
+    drawerWidth: 200, // 抽屉宽
+    drawerPosition: 'left', // 抽屉在左边还是右边
+    // contentComponent: CustomDrawerContentComponent,  // 自定义抽屉组件
+    contentOptions: {
+      initialRouteName: MainScreen, // 默认页面组件
+      activeTintColor: 'white',  // 选中文字颜色
+      activeBackgroundColor: '#ff8500', // 选中背景颜色
+      inactiveTintColor: '#666',  // 未选中文字颜色
+      inactiveBackgroundColor: 'skyblue', // 未选中背景颜色
+      style: {  // 样式
+      }
+    }
+    })
 
 AppRegistry.registerComponent('ZhiHuDaily', () => ZhiHuDaily);
