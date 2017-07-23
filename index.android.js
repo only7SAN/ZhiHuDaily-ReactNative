@@ -13,23 +13,20 @@ import { StackNavigator,DrawerNavigator } from 'react-navigation';
 
 import MainScreen from './MainScreen';
 import DrawerPanel from './DrawerPanel';
+import StoryScreen from './StoryScreen';
+
+const MainPage = StackNavigator({
+  Main:{ screen : MainScreen },
+  Story:{ screen : StoryScreen },
+})
 
 const ZhiHuDaily = DrawerNavigator({
-  Home:{ screen : MainScreen },
+  Home:{ screen : MainPage },
   Drawer:{ screen : DrawerPanel },
 },{
     drawerWidth: 200, // 抽屉宽
     drawerPosition: 'left', // 抽屉在左边还是右边
-    // contentComponent: CustomDrawerContentComponent,  // 自定义抽屉组件
-    contentOptions: {
-      initialRouteName: MainScreen, // 默认页面组件
-      activeTintColor: 'white',  // 选中文字颜色
-      activeBackgroundColor: '#ff8500', // 选中背景颜色
-      inactiveTintColor: '#666',  // 未选中文字颜色
-      inactiveBackgroundColor: 'skyblue', // 未选中背景颜色
-      style: {  // 样式
-      }
-    }
+    contentComponent: DrawerPanel,  // 自定义抽屉组件
     })
 
 AppRegistry.registerComponent('ZhiHuDaily', () => ZhiHuDaily);
