@@ -12,7 +12,7 @@ const HomeNav = (HeaderProps) => {
   console.log("123")
   return (
   <View style={styles.HomeNav}>
-    <Button title="选项" style={styles.NavLeftBtn} onPress={() => {HeaderProps.navigation.navigate('DrawerOpen')}} ></Button>
+    <Button title="选项" color='#E5D1D1' style={styles.NavLeftBtn} onPress={() => {HeaderProps.navigation.navigate('DrawerOpen')}} ></Button>
     <Text style={styles.NavTitle}>首页</Text>
   </View>
   )
@@ -42,21 +42,19 @@ const styles = StyleSheet.create({
     height:50,
     overflow:'hidden',
     flexDirection:"row",
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor:'#39ACFB',
   },
   NavLeftBtn:{
-    display:'inline-block',
-    position: 'absolute',
-    width:30,
-    height:50,
-    left:20,
-    top:10,
+    margin:30
   },
   NavTitle:{
     fontSize:20,
     textAlign:'center',
-    flex:1,
-    color:'skyblue'
+    marginRight:50,
+    flex:2,
+    color:'#FFFFFF'
   }
 })
 
