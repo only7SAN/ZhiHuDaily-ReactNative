@@ -4,18 +4,31 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  ToolbarAndroid,
+  Button,
+  FlatList
 } from 'react-native';
 
+import DataRepository from './DataRepository';
+
 const HomeNav = (HeaderProps) => {
-  console.log(HeaderProps);
-  console.log("123")
-  return (
-  <View style={styles.HomeNav}>
-    <Button title="选项" color='#E5D1D1' style={styles.NavLeftBtn} onPress={() => {HeaderProps.navigation.navigate('DrawerOpen')}} ></Button>
-    <Text style={styles.NavTitle}>首页</Text>
-  </View>
-  )
+    let dataSource = new DataRepository();
+    console.log(HeaderProps);
+    console.log("123")
+    let toolbarActions = [
+      {title: '提醒', icon: require('./img/ic_message_white.png'), show: 'always'},
+      {title: '夜间模式', show: 'never'},
+      {title: '设置选项', show: 'never'},
+    ];
+    return (
+        <ToolbarAndroid
+            style={styles.HomeNav}
+            navIcon={require('./img/ic_menu_white.png')}
+            title="首页"
+            titleColor="#FFFFFF"
+            actions={toolbarActions}
+            onIconClicked={() => {HeaderProps.navigation.navigate('DrawerOpen')}} />
+    )
 }
 
 class MainScreen extends Component {
@@ -30,8 +43,11 @@ class MainScreen extends Component {
     console.log("2")
     return (
       <View>
-        <Text>哈哈哈</Text>
-        <Button title="故事" onPress={() => {this.props.navigation.navigate('Story')}} ></Button>
+        <Text>今日新闻</Text>
+        <FlatList
+          data={[{key: 'a'}, {key: 'b'}]}
+          renderItem={({item}) => <Text>{item.key}</Text>}
+        />
       </View>
     );
   }
