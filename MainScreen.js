@@ -8,11 +8,13 @@ import {
   Button,
   FlatList
 } from 'react-native';
+import Swiper from 'react-native-swiper';
 
 import DataRepository from './DataRepository';
 
+import StoryItem from './StoryItem';
+
 const HomeNav = (HeaderProps) => {
-    let dataSource = new DataRepository();
     console.log(HeaderProps);
     console.log("123")
     let toolbarActions = [
@@ -40,13 +42,36 @@ class MainScreen extends Component {
 
   render() {
     console.log(this.props.navigation);
-    console.log("2")
+    console.log("2");
+    let dataSource = new DataRepository();
+    let dataLatest = {};
+    dataSource
+    ._safeFetch("https://news-at.zhihu.com/api/4/news/latest")
+    .then((res) => {
+      dataLatest = res;
+      console.log(res);
+      console.log(dataLatest);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
     return (
       <View>
+        <Swiper style={styles.wrapper} autoplay={true} showsButtons={true} height={250}>
+          <View style={styles.slide1}>
+            <Text style={styles.text}>Hello Swiper</Text>
+          </View>
+          <View style={styles.slide2}>
+            <Text style={styles.text}>Beautiful</Text>
+          </View>
+          <View style={styles.slide3}>
+            <Text style={styles.text}>And simple</Text>
+          </View>
+        </Swiper>
         <Text>今日新闻</Text>
         <FlatList
           data={[{key: 'a'}, {key: 'b'}]}
-          renderItem={({item}) => <Text>{item.key}</Text>}
+          renderItem={({item}) => <StoryItem id={item.key} navigation={this.props.navigation} />}
         />
       </View>
     );
@@ -71,6 +96,31 @@ const styles = StyleSheet.create({
     marginRight:50,
     flex:2,
     color:'#FFFFFF'
+  },
+  wrapper: {
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
   }
 })
 
