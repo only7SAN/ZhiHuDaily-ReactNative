@@ -40,24 +40,33 @@ class MainScreen extends Component {
     headerTintColor:'skyblue',  
   }
 
-  render() {
-    console.log(this.props.navigation);
-    console.log("2");
+  constructor(props){
+    super(props);
+    this.state = {dataLatest:{}}
+  }
+
+  componentDidMount(){
     let dataSource = new DataRepository();
     let dataLatest = {};
     dataSource
     ._safeFetch("https://news-at.zhihu.com/api/4/news/latest")
     .then((res) => {
-      dataLatest = res;
+      this.setState({dataLatest:res});
       console.log(res);
-      console.log(dataLatest);
     })
     .catch((err) => {
       console.log(err);
     })
+  }
+
+   _keyExtractor = (item, index) => item.id;
+
+  render() {
+    console.log(this.props.navigation);
+    console.log("2",this.state);
     return (
-      <View>
-        <Swiper style={styles.wrapper} autoplay={true} showsButtons={true} height={250}>
+      <View style={styles.mainPage}>
+        <Swiper style={styles.wrapper} autoplay={true} showsButtons={true} height={200}>
           <View style={styles.slide1}>
             <Text style={styles.text}>Hello Swiper</Text>
           </View>
@@ -68,10 +77,12 @@ class MainScreen extends Component {
             <Text style={styles.text}>And simple</Text>
           </View>
         </Swiper>
-        <Text>今日新闻</Text>
+        <Text style={styles.newsDate}>今日新闻</Text>
         <FlatList
-          data={[{key: 'a'}, {key: 'b'}]}
-          renderItem={({item}) => <StoryItem id={item.key} navigation={this.props.navigation} />}
+          style={styles.newsList}
+          data={this.state.dataLatest.stories}
+          renderItem={({item}) => <StoryItem key={item.id} navigation={this.props.navigation} {...item} />}
+          keyExtractor={this._keyExtractor}
         />
       </View>
     );
@@ -81,21 +92,8 @@ class MainScreen extends Component {
 const styles = StyleSheet.create({
   HomeNav:{
     height:50,
-    overflow:'hidden',
-    flexDirection:"row",
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor:'#39ACFB',
   },
-  NavLeftBtn:{
-    margin:30
-  },
-  NavTitle:{
-    fontSize:20,
-    textAlign:'center',
-    marginRight:50,
-    flex:2,
-    color:'#FFFFFF'
+  mainPage:{
   },
   wrapper: {
   },
@@ -117,10 +115,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#92BBD9',
   },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
+  newsDate:{
+    marginLeft:20,
+    marginTop:10,
+    marginBottom:10,
+    fontSize:20,
+  },
+  newsList:{
   }
 })
 
