@@ -6,7 +6,8 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry
+  AppRegistry,
+  Dimensions
 } from 'react-native';
 
 import { StackNavigator,DrawerNavigator } from 'react-navigation';
@@ -24,7 +25,7 @@ const ZhiHuDaily = DrawerNavigator({
   Home:{ screen : MainPage },
   Drawer:{ screen : DrawerPanel },
 },{
-    drawerWidth: 200, // 抽屉宽
+    drawerWidth: Dimensions.get('window').width - 100, // 抽屉宽
     drawerPosition: 'left', // 抽屉在左边还是右边
     contentComponent: DrawerPanel,  // 自定义抽屉组件
     })

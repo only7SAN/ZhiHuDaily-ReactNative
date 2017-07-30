@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
@@ -10,8 +9,10 @@ import {
 
 class StoryItem extends Component {
   touchItem = () => {
-    this.props.navigation.navigate('Story');
-  }
+    console.log();
+    let { id} = this.props;
+    this.props.navigation.navigate('Story',{ newId: id});
+  };
 
   render() {
     let { title, id, images } = this.props;
@@ -52,6 +53,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#dddddd',
     marginLeft:10,
   },
-})
+});
 
 export default StoryItem;

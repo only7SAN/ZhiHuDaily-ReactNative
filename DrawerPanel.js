@@ -4,8 +4,7 @@ import {
   Text,
   View,
   TouchableHighlight,
-  Image,
-  Button
+  Image
 } from 'react-native';
 
 class DrawerPanel extends Component {
