@@ -13,7 +13,7 @@ import {
 import { StackNavigator,DrawerNavigator } from 'react-navigation';
 
 import MainScreen from './MainScreen';
-import DrawerPanel from './DrawerPanel';
+import ThemesList from './ThemesList';
 import StoryScreen from './StoryScreen';
 
 const MainPage = StackNavigator({
@@ -23,11 +23,11 @@ const MainPage = StackNavigator({
 
 const ZhiHuDaily = DrawerNavigator({
   Home:{ screen : MainPage },
-  Drawer:{ screen : DrawerPanel },
+  Drawer:{ screen : ThemesList },
 },{
     drawerWidth: Dimensions.get('window').width - 100, // 抽屉宽
     drawerPosition: 'left', // 抽屉在左边还是右边
-    contentComponent: DrawerPanel,  // 自定义抽屉组件
+    contentComponent: ThemesList,  // 自定义抽屉组件
     })
 
 AppRegistry.registerComponent('ZhiHuDaily', () => ZhiHuDaily);

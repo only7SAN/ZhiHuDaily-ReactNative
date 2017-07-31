@@ -90,6 +90,7 @@ class MainScreen extends Component {
 const styles = StyleSheet.create({
   HomeNav:{
     height:50,
+    backgroundColor:'skyblue',
   },
   mainPage:{
   },
